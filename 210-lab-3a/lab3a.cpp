@@ -3,13 +3,15 @@
 
 using namespace std;
 
-struct Restaurant{
-  int rating;
-  string name;
-  char cuisine[20];
-  float averagePrice;
-  double employeeSalaryAvg;
-}
+struct Restaurant {
+    int rating;
+    string name;
+    char cuisine[20];        
+    float averagePrice;
+    double employeeSalaryAvg;
+};
+
+
 Restaurant addRestaurant();
 void displayRestaurant(const Restaurant& r);
 
@@ -21,7 +23,7 @@ int main() {
 
     for (int i = 0; i < NUM_RESTAURANTS; i++) {
         cout << "\nRestaurant #" << (i + 1) << ":\n";
-        restaurants[i] = createRestaurant();
+        restaurants[i] = addRestaurant();
     }
 
     cout << "\nDisplaying all restaurant data:\n";
@@ -32,30 +34,55 @@ int main() {
     return 0;
 }
 
-Restaurant addRestaurant(){
+Restaurant addRestaurant() {
+    Restaurant temp;
 
-  Restaurant temp;
-  cout << "\nEnter the Restauarant rating (out of 10)" << endl;
-  getline(cin, temp.rating);
-  cout << "\nEnter Restaurant Name: " << endl;
-  getline(cin, temp.name);
-  cout << "Enter the type of cuisine offered by this restaurant: (one word)" << endl;
-  getline(cin, temp.cuisine);
-  cout << "Enter the average price of a dinner meal: " << endl;
-  getline(cin, temp.averagePrice);
-  cout << "Enter the average employee salary: " << endl;
-  getline(cin, temp.employeeSalaryAvg);
-  cin.ignore();
+    cout << "Enter the restaurant rating (out of 10): ";
+    cin >> temp.rating;
+    while (cin.fail() || temp.rating < 0 || temp.rating > 10) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Invalid input. Enter rating between 0 and 10: ";
+        cin >> temp.rating;
+    }
 
-  return temp;
+    cin.ignore();
+
+    cout << "Enter Restaurant Name: ";
+    getline(cin, temp.name);
+
+    cout << "Enter the type of cuisine offered (one word): ";
+    cin >> temp.cuisine;
+
+    cout << "Enter the average price of a dinner meal: ";
+    cin >> temp.averagePrice;
+    while (cin.fail() || temp.averagePrice < 0) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Invalid input. Enter a positive number: ";
+        cin >> temp.averagePrice;
+    }
+
+    cout << "Enter the average employee salary: ";
+    cin >> temp.employeeSalaryAvg;
+    while (cin.fail() || temp.employeeSalaryAvg < 0) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Invalid input. Enter a positive number: ";
+        cin >> temp.employeeSalaryAvg;
+    }
+
+    cin.ignore();
+
+    return temp;
 }
 
 void displayRestaurant(const Restaurant& r) {
     cout << "\n--- Restaurant Information ---\n";
     cout << "Name: " << r.name << endl;
-    cout << "Address: " << r.address << endl;
-    cout << "Cuisine Type: " << r.cuisineType << endl;
-    cout << "Rating: " << r.rating << " stars" << endl;
-    cout << "Average Price: $" << r.averagePrice << endl;
+    cout << "Cuisine Type: " << r.cuisine << endl;
+    cout << "Rating: " << r.rating << " / 10" << endl;
+    cout << "Average Meal Price: $" << r.averagePrice << endl;
+    cout << "Average Employee Salary: $" << r.employeeSalaryAvg << endl;
     cout << "------------------------------\n";
 }
