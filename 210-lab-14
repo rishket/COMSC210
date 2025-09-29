@@ -13,7 +13,6 @@ private:
 public:
     // Constructor
     Color(int r = 0, int g = 0, int b = 0) : red(r), green(g), blue(b) {}
-
     // Setters
     void setRed(int r)
     {
@@ -27,7 +26,6 @@ public:
     {
         blue = b;
     }
-
     // Getters
     int getRed() const { return red; }
     int getGreen() const { return green; }
@@ -40,7 +38,26 @@ public:
     }
 };
 
-    int main()
-    {
-        return 0;
-    }
+int main(){
+    // Create several Color objects
+    Color c1(255, 0, 0);     // Red
+    Color c2(0, 255, 0);     // Green
+    Color c3(0, 0, 255);     // Blue
+    Color c4;                // Default Black
+    Color c5(128, 128, 128); // Gray
+
+    // Change one with setters
+    c4.setRed(255);
+    c4.setGreen(255);
+    c4.setBlue(0); // Yellow
+
+    // Print all colors
+    cout << "Printing Color objects:" << endl;
+    c1.print();
+    c2.print();
+    c3.print();
+    c4.print();
+    c5.print();
+
+    return 0;
+}
