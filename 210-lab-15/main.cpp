@@ -36,3 +36,34 @@ public:
         cout << endl;
     }
 };
+
+int main()
+{
+    ifstream inFile("input.txt");
+    if (!inFile)
+    {
+        cerr << "Error: Could not open input.txt" << endl;
+        return 1;
+    }
+
+    vector<Movie> movies;
+    string title, writer;
+    int year;
+
+        while (true) {
+        // Read title
+        if (!getline(inFile, title)) break;
+
+        // Read year
+        if (!(inFile >> year)) break;
+        inFile.ignore(numeric_limits<streamsize>::max(), '\n'); // consume leftover newline
+
+        // Read screenwriter
+        if (!getline(inFile, writer)) break;
+
+        // Build movie object
+        Movie temp(title, year, writer);
+
+        // Append to vector
+        movies.push_back(temp);
+    }
