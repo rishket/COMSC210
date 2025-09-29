@@ -67,3 +67,10 @@ int main()
         // Append to vector
         movies.push_back(temp);
     }
+    
+    for (const auto& m : movies) {
+        m.print();
+    }
+
+    return 0;
+}
