@@ -1,0 +1,46 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+class Color
+{
+private:
+    int red;
+    int green;
+    int blue;
+
+public:
+    // Constructor
+    Color(int r = 0, int g = 0, int b = 0) : red(r), green(g), blue(b) {}
+
+    // Setters
+    void setRed(int r)
+    {
+        red = r;
+    }
+    void setGreen(int g)
+    {
+        green = g;
+    }
+    void setBlue(int b)
+    {
+        blue = b;
+    }
+
+    // Getters
+    int getRed() const { return red; }
+    int getGreen() const { return green; }
+    int getBlue() const { return blue; }
+
+    // Print method
+    void print() const
+    {
+        cout << "Color(R:" << setw(3) << red << " G:" << setw(3) << green << " B:" << setw(3) << blue << ")" << endl;
+    }
+};
+
+    int main()
+    {
+        return 0;
+    }
