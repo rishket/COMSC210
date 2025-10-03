@@ -43,7 +43,7 @@ public:
     // Print method
     void print() const
     {
-        cout << "Color(R:" << setw(3) << red << " G:" << setw(3) << green << " B:" << setw(3) << blue << ")" << endl;
+        cout << "R:" << setw(3) << red << " G:" << setw(3) << green << " B:" << setw(3) << blue << "\n" << endl;
     }
 };
 
@@ -59,10 +59,15 @@ int main()
 
     cout << "Color Constructor Demonstration" << endl;
     cout << "-----------------------------" << endl;
+    cout << "Default:     " << endl;
     Default.print();
+    cout << "Full:     " << endl;
     Full.print();
+    cout << "Red Only:     " << endl;
     RedOnly.print();
+    cout << "Red and Green:     " << endl;
     RednGreen.print();
+    cout << "Blue Only:     " << endl;
     Blue.print();
     return 0;
 }
