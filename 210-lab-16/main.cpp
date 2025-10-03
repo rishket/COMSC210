@@ -17,14 +17,9 @@ public:
     // Full parameter constructor (r, g, b)
     Color(int r, int g, int b) : red(r), green(g), blue(b) {}
 
-    //Partial parameter constructors
-    Color(int r, int g = 0, int b = 0) : red(r), green(g), blue(b) {} // red only
-    Color(int r = 0, int g = 0, int b) : red(0), green(g), blue(b) {} // blue only
-    Color(int r = 0, int g, int b = 0) : red(0), green(g), blue(b) {} // green only
-    Color(int r, int g, int b = 0) : red(r), green(g), blue(0) {} // red and green
-    Color(int r = 0, int g, int b) : red(r), green(g), blue(b) {} // green and blue
-    Color(int r, int g = 0, int b) : red(r), green(g), blue(b) {} // red and blue
-
+    // partial constructors: one-arg (red only) and two-arg (red & green)
+    Color(int r) : red(r), green(0), blue(0) {}
+    Color(int r, int g) : red(r), green(g), blue(0) {}
 
     // Getters
     int getRed() const { return red; }
@@ -54,6 +49,9 @@ public:
 
 int main()
 {
-    cout << "testing\n" << endl;
+    Color default;
+    Color red(255, 0, 0);
+    Color
+    
     return 0;
 }
