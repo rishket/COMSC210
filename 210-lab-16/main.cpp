@@ -11,8 +11,16 @@ private:
     int blue;
 
 public:
-    // Constructor
-    Color(int r = 0, int g = 0, int b = 0) : red(r), green(g), blue(b) {}
+   // Default constructor
+    Color() : red(0), green(0), blue(0) {}
+
+    // Full parameter constructor (r, g, b)
+    Color(int r, int g, int b) : red(r), green(g), blue(b) {}
+
+    // Getters
+    int getRed() const { return red; }
+    int getGreen() const { return green; }
+    int getBlue() const { return blue; }
     // Setters
     void setRed(int r)
     {
@@ -26,10 +34,6 @@ public:
     {
         blue = b;
     }
-    // Getters
-    int getRed() const { return red; }
-    int getGreen() const { return green; }
-    int getBlue() const { return blue; }
 
     // Print method
     void print() const
