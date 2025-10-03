@@ -49,9 +49,20 @@ public:
 
 int main()
 {
-    Color default;
-    Color red(255, 0, 0);
-    Color
-    
+    Color Default;
+    Color Full(143, 155, 223);
+    Color RedOnly(255);
+    Color RednGreen(100, 200);
+    Color Blue(0, 0, 255);
+
+    //print color objects:
+
+    cout << "Color Constructor Demonstration" << endl;
+    cout << "-----------------------------" << endl;
+    Default.print();
+    Full.print();
+    RedOnly.print();
+    RednGreen.print();
+    Blue.print();
     return 0;
 }
