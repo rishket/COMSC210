@@ -18,12 +18,12 @@ public:
     Color(int r, int g, int b) : red(r), green(g), blue(b) {}
 
     //Partial parameter constructors
-    Color(int r, int g) : red(r), green(g), blue(0) {}
-    Color(int r) : red(r), green(0), blue (0) {}
-    Color(int b) : red(0), green(0), blue(b) {}
-    Color(int g) : red(0), green(g), blue(0) {}
-    Color(int g, int b) : red(0), green(g), blue(b) {}
-    Color(int r, int b) : red(r), green(0), blue(b) {}
+    Color(int r, int g = 0, int b = 0) : red(r), green(g), blue(b) {} // red only
+    Color(int r = 0, int g = 0, int b) : red(0), green(g), blue(b) {} // blue only
+    Color(int r = 0, int g, int b = 0) : red(0), green(g), blue(b) {} // green only
+    Color(int r, int g, int b = 0) : red(r), green(g), blue(0) {} // red and green
+    Color(int r = 0, int g, int b) : red(r), green(g), blue(b) {} // green and blue
+    Color(int r, int g = 0, int b) : red(r), green(g), blue(b) {} // red and blue
 
 
     // Getters
