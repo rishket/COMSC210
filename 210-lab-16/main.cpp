@@ -17,10 +17,18 @@ public:
     // Full parameter constructor (r, g, b)
     Color(int r, int g, int b) : red(r), green(g), blue(b) {}
 
+    //Partial parameter constructors
+    Color(int r, int g) : red(r), green(g), blue(0) {}
+    Color(int r) : red(r), green(0), blue (0) {}
+    Color(int b) : red(0), green(0), blue(b) {};
+    Color(int g, int b) : red(0), green(g), blue(b) {}
+
+
     // Getters
     int getRed() const { return red; }
     int getGreen() const { return green; }
     int getBlue() const { return blue; }
+
     // Setters
     void setRed(int r)
     {
