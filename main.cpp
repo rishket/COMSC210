@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 
 using namespace std;
@@ -11,7 +14,8 @@ struct Review {
     Review* next;
 };
 
-class Movie{private:
+class Movie{
+private:
     string title;
     Review* head;
 
@@ -44,6 +48,25 @@ public:
         Review* temp = head;
         int count = 0;
         double total = 0.0;
+
+        while (temp != nullptr) {
+            count++;
+            cout << "    > Review #" << count << ": " << fixed << setprecision(1) << temp->rating << ": " << temp->comment << endl;
+            total += temp->rating;
+            temp = temp->next;
+        }
+
+        cout << "    > Average: " << fixed << setprecision(2) << total / count << endl;
+    }
+    
+    ~Movie() {
+        while (head != nullptr) {
+            Review* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+};
 
 int main()
 {   
