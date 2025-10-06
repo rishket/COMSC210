@@ -58,7 +58,7 @@ public:
 
         cout << "    > Average: " << fixed << setprecision(2) << total / count << endl;
     }
-    
+
     ~Movie() {
         while (head != nullptr) {
             Review* temp = head;
@@ -99,5 +99,18 @@ int main()
         Movie("Echoes of Tomorrow"),
         Movie("Quantum Breakpoint")
     };
+
+    int index = 0;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 3; j++) {
+            movies[i].addReview(comments[index++]);
+        }
+    }
+
+    cout << "\n=== Movie Reviews ===\n";
+    for (int i = 0; i < 4; i++) {
+        movies[i].showReviews();
+    }
+
     return 0;
 }
