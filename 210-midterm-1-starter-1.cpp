@@ -232,24 +232,27 @@ private:
         delete temp;              // Free memory of old tail
     }
 
+    // Destructor to clean up all allocated memory
     ~DoublyLinkedList()
     {
+        // Traverse the list, deleting each node
         while (head)
         {
-            Node *temp = head;
-            head = head->next;
-            delete temp;
+            Node *temp = head;      // Store current head
+            head = head->next;      // Move to next node
+            delete temp;            // Delete stored node
         }
     }
 
+    // Print every other element starting with the first one
     void every_other_element()
     {
-        Node *current = head;
-        int count = 1;
+        Node *current = head;       // Start at beginning
+        int count = 1;             // Track position
 
         while (current)
         {
-            if (count % 2 == 1)
+            if (count % 2 == 1)    // Print only odd-numbered positions
             {
                 cout << current->data << " ";
             }
@@ -259,15 +262,16 @@ private:
         cout << endl;
     }
 
+    // Print all elements from head to tail
     void print()
     {
-        Node *current = head;
-        if (!current)
+        Node *current = head;       // Start at beginning
+        if (!current)              // Check if list is empty
         {
             cout << "List is empty." << endl;
             return;
         }
-        while (current)
+        while (current)            // Traverse forward
         {
             cout << current->data << " ";
             current = current->next;
@@ -275,15 +279,16 @@ private:
         cout << endl;
     }
 
+    // Print all elements from tail to head
     void print_reverse()
     {
-        Node *current = tail;
-        if (!current)
+        Node *current = tail;       // Start at end
+        if (!current)              // Check if list is empty
         {
             cout << "List is empty." << endl;
             return;
         }
-        while (current)
+        while (current)            // Traverse backward
         {
             cout << current->data << " ";
             current = current->prev;
