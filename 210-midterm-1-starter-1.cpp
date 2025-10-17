@@ -23,7 +23,9 @@ private:
     };
 
     Node *head; // Points to the first node in the list
-    Node *tail; // Points to the last node in the listpublic:
+    Node *tail; // Points to the last node in the list
+
+public:
     // Constructor: Initialize an empty list with null head and tail pointers
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
@@ -247,19 +249,30 @@ private:
     // Print every other element starting with the first one
     void every_other_element()
     {
+        // Check for empty list
+        if (!head)
+        {
+            cout << "List is empty." << endl;
+            return;
+        }
+
         Node *current = head;       // Start at beginning
         int count = 1;             // Track position
+        bool elementsPrinted = false; // Track if we printed anything
 
         while (current)
         {
             if (count % 2 == 1)    // Print only odd-numbered positions
             {
                 cout << current->data << " ";
+                elementsPrinted = true;
             }
             current = current->next;
             count++;
         }
-        cout << endl;
+        
+        if (elementsPrinted)
+            cout << endl;
     }
 
     // Print all elements from head to tail
