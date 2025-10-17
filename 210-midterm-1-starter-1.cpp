@@ -185,44 +185,51 @@ private:
         }
     }
 
+    // Remove the first node from the list
     void pop_front()
     {
-
+        // Check if list is empty
         if (!head)
         {
             cout << "List is empty." << endl;
             return;
         }
 
+        // Store current head to delete later
         Node *temp = head;
 
+        // If there's more than one node
         if (head->next)
         {
-            head = head->next;
-            head->prev = nullptr;
+            head = head->next;     // Move head to next node
+            head->prev = nullptr;  // Remove link to old head
         }
         else
-            head = tail = nullptr;
-        delete temp;
+            head = tail = nullptr; // List becomes empty
+        delete temp;              // Free memory of old head
     }
 
+    // Remove the last node from the list
     void pop_back()
     {
+        // Check if list is empty
         if (!tail)
         {
             cout << "List is empty." << endl;
             return;
         }
+        // Store current tail to delete later
         Node *temp = tail;
 
+        // If there's more than one node
         if (tail->prev)
         {
-            tail = tail->prev;
-            tail->next = nullptr;
+            tail = tail->prev;     // Move tail to previous node
+            tail->next = nullptr;  // Remove link to old tail
         }
         else
-            head = tail = nullptr;
-        delete temp;
+            head = tail = nullptr; // List becomes empty
+        delete temp;              // Free memory of old tail
     }
 
     ~DoublyLinkedList()
