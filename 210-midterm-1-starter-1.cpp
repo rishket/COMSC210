@@ -1,9 +1,13 @@
 #include <iostream>
-using namespace std;
+// Include iostream for input/output operations (cout, endl)
+using namespace std; // Bring std symbols into global namespace for brevity
 
 // Constants for random number generation and list size limits
+// MIN_NR and MAX_NR could be used to generate values; MIN_LS and MAX_LS
+// indicate a plausible range for list sizes in test scenarios.
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+// DoublyLinkedList: implements a simple doubly-linked list with head and tail
 class DoublyLinkedList
 {
 private:
@@ -312,30 +316,36 @@ public:
 
 int main()
 {
-    DoublyLinkedList list;
+    // Create an instance of DoublyLinkedList named 'list'
+    DoublyLinkedList list; // default constructor sets head and tail to nullptr
 
-    // Add some test values
+    // Populate the list with six values: 10,20,30,40,50,60
+    // Loop variable i starts at 1 and increments to 6 inclusive
     for(int i = 1; i <= 6; i++) {
+        // push_back allocates a new Node with value (i*10) and appends it
         list.push_back(i * 10);
     }
 
+    // Display the full list contents from head to tail
     cout << "Original list: ";
-    list.print();
+    list.print(); // expected output: 10 20 30 40 50 60 
 
+    // Demonstrate the every_other_element method starting from the first element
     cout << "Every other element: ";
-    list.every_other_element();
+    list.every_other_element(); // expected output: 10 30 50 
 
-    // Test with modifications
+    // Modify the list: delete the node at position 2 (1-based index), i.e., remove '20'
     list.delete_pos(2);
     cout << "After deleting position 2: ";
-    list.print();
+    list.print(); // expected output: 10 30 40 50 60
     cout << "Every other element after deletion: ";
-    list.every_other_element();
+    list.every_other_element(); // expected output: 10 40 60
 
-    // Test empty list case
-    DoublyLinkedList emptyList;
+    // Demonstrate behavior for an empty list instance
+    DoublyLinkedList emptyList; // new empty list, head and tail are nullptr
     cout << "Empty list every other element: ";
-    emptyList.every_other_element();
+    emptyList.every_other_element(); // expected output: List is empty.
 
+    // Return 0 to indicate successful execution to the OS
     return 0;
 }
