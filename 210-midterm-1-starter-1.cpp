@@ -4,148 +4,177 @@ using namespace std;
 // Constants for random number generation and list size limits
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
-class DoublyLinkedList {
+class DoublyLinkedList
+{
 private:
     // Node structure for doubly linked list
-    struct Node {
-        int data;          // Stores the value in the node
-        Node* prev;        // points to the previous node in the list
-        Node* next;        // Point to the next node in the list
+    struct Node
+    {
+        int data;   // Stores the value in the node
+        Node *prev; // points to the previous node in the list
+        Node *next; // Point to the next node in the list
         // Constructor initializes a node with a value and optional prev/next pointers
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val;    // Set the nodes data
-            prev = p;      // Set the previous pointer
-            next = n;      // Set the next pointer
+        Node(int val, Node *p = nullptr, Node *n = nullptr)
+        {
+            data = val; // Set the nodes data
+            prev = p;   // Set the previous pointer
+            next = n;   // Set the next pointer
         }
     };
 
-    Node* head;    // Points to the first node in the list
-    Node* tail;    // Points to the last node in the listpublic:
+    Node *head; // Points to the first node in the list
+    Node *tail; // Points to the last node in the listpublic:
+    // Constructor: Initialize an empty list with null head and tail pointers
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
+    // Insert a new node with given value after the specified position
     void insert_after(int value, int position) {
+        // Check for valid position
         if (position < 0) {
             cout << "Position must be >= 0." << endl;
             return;
         }
 
+        // Create new node with the given value
         Node* newNode = new Node(value);
+        // If list is empty, make new node both head and tail
         if (!head) {
             head = tail = newNode;
             return;
         }
 
+        // Traverse to the position where we want to insert
         Node* temp = head;
         for (int i = 0; i < position && temp; ++i)
             temp = temp->next;
 
+        // If position exceeds list size, clean up and return
         if (!temp) {
             cout << "Position exceeds list size. Node not inserted.\n";
             delete newNode;
             return;
         }
 
+        // Connect new node to its neighbors
         newNode->next = temp->next;
         newNode->prev = temp;
+        // If not inserting at end, update next node's prev pointer
         if (temp->next)
             temp->next->prev = newNode;
         else
-            tail = newNode;
-        temp->next = newNode;
+            tail = newNode;  // If inserting at end, update tail
+        temp->next = newNode;  // Connect current node to new node
     }
 
-    void delete_val(int value) {
-        if (!head) return;
+    void delete_val(int value)
+    {
+        if (!head)
+            return;
 
-        Node* temp = head;
-        
+        Node *temp = head;
+
         while (temp && temp->data != value)
             temp = temp->next;
 
-        if (!temp) return; 
+        if (!temp)
+            return;
 
         if (temp->prev)
             temp->prev->next = temp->next;
         else
-            head = temp->next; 
+            head = temp->next;
 
         if (temp->next)
             temp->next->prev = temp->prev;
         else
-            tail = temp->prev; 
+            tail = temp->prev;
 
         delete temp;
     }
 
-    void delete_pos(int pos) {
-        if (!head) {
+    void delete_pos(int pos)
+    {
+        if (!head)
+        {
             cout << "List is empty." << endl;
             return;
         }
-    
-        if (pos == 1) {
+
+        if (pos == 1)
+        {
             pop_front();
             return;
         }
-    
-        Node* temp = head;
-    
-        for (int i = 1; i < pos; i++){
-            if (!temp) {
+
+        Node *temp = head;
+
+        for (int i = 1; i < pos; i++)
+        {
+            if (!temp)
+            {
                 cout << "Position doesn't exist." << endl;
                 return;
             }
             else
                 temp = temp->next;
         }
-        if (!temp) {
+        if (!temp)
+        {
             cout << "Position doesn't exist." << endl;
             return;
         }
-    
-        if (!temp->next) {
+
+        if (!temp->next)
+        {
             pop_back();
             return;
         }
-    
-        Node* tempPrev = temp->prev;
+
+        Node *tempPrev = temp->prev;
         tempPrev->next = temp->next;
         temp->next->prev = tempPrev;
         delete temp;
     }
 
-    void push_back(int v) {
-        Node* newNode = new Node(v);
+    void push_back(int v)
+    {
+        Node *newNode = new Node(v);
         if (!tail)
             head = tail = newNode;
-        else {
+        else
+        {
             tail->next = newNode;
             newNode->prev = tail;
             tail = newNode;
         }
     }
-    
-    void push_front(int v) {
-        Node* newNode = new Node(v);
+
+    void push_front(int v)
+    {
+        Node *newNode = new Node(v);
         if (!head)
             head = tail = newNode;
-        else {
+        else
+        {
             newNode->next = head;
             head->prev = newNode;
             head = newNode;
         }
     }
-    
-    void pop_front() {
 
-        if (!head) {
+    void pop_front()
+    {
+
+        if (!head)
+        {
             cout << "List is empty." << endl;
             return;
         }
 
-        Node * temp = head;
+        Node *temp = head;
 
-        if (head->next) {
+        if (head->next)
+        {
             head = head->next;
             head->prev = nullptr;
         }
@@ -154,14 +183,17 @@ private:
         delete temp;
     }
 
-    void pop_back() {
-        if (!tail) {
+    void pop_back()
+    {
+        if (!tail)
+        {
             cout << "List is empty." << endl;
             return;
         }
-        Node * temp = tail;
+        Node *temp = tail;
 
-        if (tail->prev) {
+        if (tail->prev)
+        {
             tail = tail->prev;
             tail->next = nullptr;
         }
@@ -170,20 +202,25 @@ private:
         delete temp;
     }
 
-    ~DoublyLinkedList() {
-        while (head) {
-            Node* temp = head;
+    ~DoublyLinkedList()
+    {
+        while (head)
+        {
+            Node *temp = head;
             head = head->next;
             delete temp;
         }
     }
 
-    void every_other_element() {
-        Node* current = head;
+    void every_other_element()
+    {
+        Node *current = head;
         int count = 1;
-        
-        while (current) {
-            if (count % 2 == 1) {
+
+        while (current)
+        {
+            if (count % 2 == 1)
+            {
                 cout << current->data << " ";
             }
             current = current->next;
@@ -192,26 +229,32 @@ private:
         cout << endl;
     }
 
-    void print() {
-        Node* current = head;
-        if (!current) {
+    void print()
+    {
+        Node *current = head;
+        if (!current)
+        {
             cout << "List is empty." << endl;
             return;
         }
-        while (current) {
+        while (current)
+        {
             cout << current->data << " ";
             current = current->next;
         }
         cout << endl;
     }
 
-    void print_reverse() {
-        Node* current = tail;
-        if (!current) { 
+    void print_reverse()
+    {
+        Node *current = tail;
+        if (!current)
+        {
             cout << "List is empty." << endl;
             return;
         }
-        while (current) {
+        while (current)
+        {
             cout << current->data << " ";
             current = current->prev;
         }
@@ -219,9 +262,9 @@ private:
     }
 };
 
-int main() {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS;  // dummy statement to avoid compiler warning
+int main()
+{
+    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning
 
-    
     return 0;
 }
