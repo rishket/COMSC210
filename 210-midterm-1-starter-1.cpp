@@ -299,7 +299,30 @@ private:
 
 int main()
 {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning
+    DoublyLinkedList list;
+
+    // Add some test values
+    for(int i = 1; i <= 6; i++) {
+        list.push_back(i * 10);
+    }
+
+    cout << "Original list: ";
+    list.print();
+
+    cout << "Every other element: ";
+    list.every_other_element();
+
+    // Test with modifications
+    list.delete_pos(2);
+    cout << "After deleting position 2: ";
+    list.print();
+    cout << "Every other element after deletion: ";
+    list.every_other_element();
+
+    // Test empty list case
+    DoublyLinkedList emptyList;
+    cout << "Empty list every other element: ";
+    emptyList.every_other_element();
 
     return 0;
 }
