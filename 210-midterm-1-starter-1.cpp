@@ -1,25 +1,26 @@
 #include <iostream>
 using namespace std;
 
+// Constants for random number generation and list size limits
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
 class DoublyLinkedList {
 private:
+    // Node structure for doubly linked list
     struct Node {
-        int data;
-        Node* prev;
-        Node* next;
+        int data;          // Stores the value in the node
+        Node* prev;        // points to the previous node in the list
+        Node* next;        // Point to the next node in the list
+        // Constructor initializes a node with a value and optional prev/next pointers
         Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val; 
-            prev = p;
-            next = n;
+            data = val;    // Set the nodes data
+            prev = p;      // Set the previous pointer
+            next = n;      // Set the next pointer
         }
     };
 
-    Node* head;
-    Node* tail;
-
-public:
+    Node* head;    // Points to the first node in the list
+    Node* tail;    // Points to the last node in the listpublic:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
     void insert_after(int value, int position) {
