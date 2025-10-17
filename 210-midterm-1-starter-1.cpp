@@ -97,22 +97,27 @@ private:
         delete temp;
     }
 
+    // Delete node at specified position (1-based indexing)
     void delete_pos(int pos)
     {
+        // Check if list is empty
         if (!head)
         {
             cout << "List is empty." << endl;
             return;
         }
 
+        // base case: deleting first node
         if (pos == 1)
         {
             pop_front();
             return;
         }
 
+        // Start traversal from head
         Node *temp = head;
 
+        // Move to the specified position
         for (int i = 1; i < pos; i++)
         {
             if (!temp)
@@ -123,46 +128,59 @@ private:
             else
                 temp = temp->next;
         }
+        // Verify position exists
         if (!temp)
         {
             cout << "Position doesn't exist." << endl;
             return;
         }
 
+        // Special case: deleting last node
         if (!temp->next)
         {
             pop_back();
             return;
         }
 
+        // Update pointers and delete node
         Node *tempPrev = temp->prev;
         tempPrev->next = temp->next;
         temp->next->prev = tempPrev;
         delete temp;
     }
 
+    // Add new node with value v at the end of the list
     void push_back(int v)
     {
+        // Create new node with given value
         Node *newNode = new Node(v);
+        // If list is empty, set both head and tail to new node
         if (!tail)
             head = tail = newNode;
         else
         {
+            // Link new node to current tail
             tail->next = newNode;
             newNode->prev = tail;
+            // Update tail to new node
             tail = newNode;
         }
     }
 
+    // Add new node with value v at the beginning of the list
     void push_front(int v)
     {
+        // Create new node with given value
         Node *newNode = new Node(v);
+        // If list is empty, set both head and tail to new node
         if (!head)
             head = tail = newNode;
         else
         {
+            // Link new node to current head
             newNode->next = head;
             head->prev = newNode;
+            // Update head to new node
             head = newNode;
         }
     }
