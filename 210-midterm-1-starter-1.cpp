@@ -43,6 +43,7 @@ public:
 
         // Create new node with the given value
         Node* newNode = new Node(value);
+        // newNode is allocated on the heap; it will be linked into the list
         // If list is empty, make new node both head and tail
         if (!head) {
             head = tail = newNode;
@@ -51,6 +52,7 @@ public:
 
         // Traverse to the position where we want to insert
         Node* temp = head;
+        // temp will be advanced to point at the node after which we insert
         for (int i = 0; i < position && temp; ++i)
             temp = temp->next;
 
@@ -79,6 +81,7 @@ public:
 
         // Start search from head
         Node* temp = head;
+        // temp walks the list looking for a matching value
         
         // Search for node with matching value
         while (temp && temp->data != value)
@@ -120,10 +123,12 @@ public:
             return;
         }
 
-        // Start traversal from head
-        Node *temp = head;
+    // Start traversal from head
+    Node *temp = head;
+    // temp is the cursor used to reach the node at position 'pos'
 
-        // Move to the specified position
+        // Move to the specified position (1-based index). After the loop
+        // temp should point to the node at position 'pos' or become nullptr.
         for (int i = 1; i < pos; i++)
         {
             if (!temp)
@@ -148,7 +153,7 @@ public:
             return;
         }
 
-        // Update pointers and delete node
+        // Update pointers to bypass the node at 'pos' and prepare to delete it
         Node *tempPrev = temp->prev;
         tempPrev->next = temp->next;
         temp->next->prev = tempPrev;
@@ -158,7 +163,7 @@ public:
     // Add new node with value v at the end of the list
     void push_back(int v)
     {
-        // Create new node with given value
+        // Create new node with given value (allocated on heap)
         Node *newNode = new Node(v);
         // If list is empty, set both head and tail to new node
         if (!tail)
@@ -176,7 +181,7 @@ public:
     // Add new node with value v at the beginning of the list
     void push_front(int v)
     {
-        // Create new node with given value
+        // Create new node with given value (allocated on heap)
         Node *newNode = new Node(v);
         // If list is empty, set both head and tail to new node
         if (!head)
@@ -201,8 +206,8 @@ public:
             return;
         }
 
-        // Store current head to delete later
-        Node *temp = head;
+    // Store current head to delete later; temp holds the pointer to node to free
+    Node *temp = head;
 
         // If there's more than one node
         if (head->next)
@@ -224,8 +229,8 @@ public:
             cout << "List is empty." << endl;
             return;
         }
-        // Store current tail to delete later
-        Node *temp = tail;
+    // Store current tail to delete later; temp holds the pointer to node to free
+    Node *temp = tail;
 
         // If there's more than one node
         if (tail->prev)
@@ -241,12 +246,12 @@ public:
     // Destructor to clean up all allocated memory
     ~DoublyLinkedList()
     {
-        // Traverse the list, deleting each node
+        // Traverse the list, deleting each node to avoid memory leaks
         while (head)
         {
-            Node *temp = head;      // Store current head
-            head = head->next;      // Move to next node
-            delete temp;            // Delete stored node
+            Node *temp = head;      // Store current head pointer for deletion
+            head = head->next;      // Advance head to next node
+            delete temp;            // Free the memory held by the stored node
         }
     }
 
@@ -260,9 +265,9 @@ public:
             return;
         }
 
-        Node *current = head;       // Start at beginning
-        int count = 1;             // Track position
-        bool elementsPrinted = false; // Track if we printed anything
+    Node *current = head;       // Start at beginning
+    int count = 1;             // Track position (1-based)
+    bool elementsPrinted = false; // Track if we printed anything so newline is correct
 
         while (current)
         {
