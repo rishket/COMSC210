@@ -66,29 +66,34 @@ private:
         temp->next = newNode;  // Connect current node to new node
     }
 
-    void delete_val(int value)
-    {
-        if (!head)
-            return;
+    // Delete the first node that contains the specified value
+    void delete_val(int value) {
+        // Return if list is empty
+        if (!head) return;
 
-        Node *temp = head;
-
+        // Start search from head
+        Node* temp = head;
+        
+        // Search for node with matching value
         while (temp && temp->data != value)
             temp = temp->next;
 
-        if (!temp)
-            return;
+        // If value not found, return
+        if (!temp) return; 
 
+        // If node has a previous node, update its next pointer
         if (temp->prev)
             temp->prev->next = temp->next;
         else
-            head = temp->next;
+            head = temp->next;  // If deleting head, update head pointer
 
+        // If node has a next node, update its prev pointer
         if (temp->next)
             temp->next->prev = temp->prev;
         else
-            tail = temp->prev;
+            tail = temp->prev;  // If deleting tail, update tail pointer
 
+        // Free the memory of deleted node
         delete temp;
     }
 
