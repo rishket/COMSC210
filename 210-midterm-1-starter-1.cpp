@@ -177,6 +177,21 @@ private:
             delete temp;
         }
     }
+
+    void every_other_element() {
+        Node* current = head;
+        int count = 1;
+        
+        while (current) {
+            if (count % 2 == 1) {
+                cout << current->data << " ";
+            }
+            current = current->next;
+            count++;
+        }
+        cout << endl;
+    }
+
     void print() {
         Node* current = head;
         if (!current) {
